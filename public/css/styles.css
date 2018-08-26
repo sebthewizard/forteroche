@@ -1,0 +1,139 @@
+/*
+@font-face {
+	font-family: 'FontAwesome';
+	src: 	url('../fonts/fa-solid-900.woff') format('woff'),
+			url('../fonts/fa-solid-900.svg') format('svg'),
+			url('../fonts/fa-solid-900.ttf') format('truetype'),
+			url('../fonts/fa-solid-900.eot') format('eot');
+}
+
+*/
+
+@font-face {
+	font-family: 'RobotoBlack';
+	src: url('../fonts/Roboto-Black.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'RobotoLight';
+	src: url('../fonts/Roboto-Light.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'NoteThis';
+	src: url('../fonts/Note_this.ttf') format('truetype');
+}
+
+body {
+	background-image: url("../images/background.png");
+	background-repeat: repeat-y;
+}
+
+p, h2 {
+	margin: 0;
+	font-weight: bold;
+}
+
+#title {
+	font-family: NoteThis, Helvetica, sans-serif;
+	font-size: 2rem;
+	margin: 0;
+}
+
+.navbar-brand, .nav-link {
+	color: black;
+}
+
+.nav-link {
+	font-family: RobotoLight, Helvetica, sans-serif;
+	font-size: 1.1rem;
+	font-weight: bold;
+}
+
+.menu_height {
+	display: block;
+	height: 66px;
+	visibility: hidden;
+}
+
+#hello-register {
+	position: relative;
+}
+
+#hello-register-container {
+	display: flex;
+	justify-content: center;
+    align-items: center;
+	position: absolute;
+	top: -200%;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	transition: top 2s ease;
+}
+
+#hello-register-content {
+	font-family: RobotoLight, Helvetica, sans-serif;
+	text-align: center;
+	background-color: rgba(255,255,255,0.75);
+	padding: 5px;
+	border-radius: 5px;
+}
+
+footer {
+	background-color: white;
+}
+
+
+@media all and (max-width: 480px) {
+	
+	h2 {
+		font-size: 1rem;
+	}
+	
+	#title {
+		font-size: 1.4rem;
+	}
+	
+	#hello-register-content {
+		font-size: 0.9rem;
+	}
+}
+
+
+/*
+@media all and (max-width: 320px) {
+	
+	#hello-register-text h2 {
+		font-size: 1.4rem;
+	}
+}
+
+@media all and (max-width: 480px) {
+	
+	#title {
+		font-size: 1.4rem;
+	}
+	
+	#hello-register-text {
+		left: 0;
+		position: static;
+		border-radius: 0;
+	}	
+}
+
+@media all and (max-width: 720px) {
+	
+	#hello-register-text {
+		left: 15%;
+		top: 10%;
+	}
+}
+
+@media all and (max-width: 960px) {
+	
+	#hello-register-text {
+		left: 25%;
+	}
+}
+*/
