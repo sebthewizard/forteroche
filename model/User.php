@@ -1,5 +1,4 @@
 <?php
-require_once("model/Manager.php");
 
 class User {
 	
@@ -25,7 +24,6 @@ class User {
     		}
   		}
 	}
-	
 	
 	// Getters
 	public function id() {return $this->_id;}

@@ -32,18 +32,34 @@
 				<div class="form-group">
     				<label for="pseudo">Pseudo</label>
     				<input type="text" class="form-control" id="pseudo" name="pseudo" required />
+					<?php
+					if ($errorCode == 3)
+						echo "<span class='error'><strong>".$errorMessage."</strong></span>";
+					?>
   				</div>
 				<div class="form-group">
     				<label for="password">Mot de Passe</label>
     				<input type="password" class="form-control" name="password" id="password" required />
+					<?php
+					if ($errorCode == 4)
+						echo "<span class='error'><strong>".$errorMessage."</strong></span>";
+					?>
   				</div>
 				<div class="form-group">
     				<label for="password1">Retaper le mot de Passe</label>
     				<input type="password" class="form-control" name="password1" id="password1" required />
+					<?php
+					if ($errorCode == 4)
+						echo "<span class='error'><strong>".$errorMessage."</strong></span>";
+					?>
   				</div>
   				<div class="form-group">
     				<label for="email">Email</label>
     				<input type="email" class="form-control" name="email" id="email" required />
+					<?php
+					if ($errorCode == 5)
+						echo "<span class='error'><strong>".$errorMessage."</strong></span>";
+					?>
   				</div>
   				<div class="form-group form-check">
     				<label class="form-check-label">

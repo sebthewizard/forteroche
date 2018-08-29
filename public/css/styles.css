@@ -34,6 +34,10 @@ p, h2 {
 	font-weight: bold;
 }
 
+.error {
+	color: red;
+}
+
 #title {
 	font-family: NoteThis, Helvetica, sans-serif;
 	font-size: 2rem;

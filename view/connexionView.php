@@ -32,10 +32,18 @@
 				<div class="form-group">
     				<label for="pseudo">Pseudo</label>
     				<input type="text" class="form-control" id="pseudo" name="pseudo" required />
+					<?php
+					if ($errorCode == 1)
+						echo "<span class='error'><strong>".$errorMessage."</strong></span>";
+					?>
   				</div>
 				<div class="form-group">
     				<label for="password">Mot de Passe</label>
     				<input type="password" class="form-control" name="password" id="password" required />
+					<?php
+					if ($errorCode == 2)
+						echo "<span class='error'><strong>".$errorMessage."</strong></span>";
+					?>
   				</div>
   				<div class="form-group form-check">
     				<label class="form-check-label">

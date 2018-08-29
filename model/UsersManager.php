@@ -17,7 +17,7 @@ class UsersManager extends Manager {
 	public function add(User $newUser) {
 		$q = $this->_db->query('SELECT COUNT(*) AS nb FROM users WHERE pseudo = '.'\''.$newUser->pseudo().'\'') or die(print_r($this->_db->errorInfo()));
 		$data = $q->fetch();
-		if ($data['nb'] > 0) throw new Exception('Pseudo déja utilisé');
+		if ($data['nb'] > 0) return false;
 		$q = $this->_db->prepare('INSERT INTO users(pseudo, passwd, email) VALUES(:pseudo, :passwd, :email)');
 		$q->execute(array(
 			'pseudo' => $newUser->pseudo(),
@@ -31,7 +31,7 @@ class UsersManager extends Manager {
 	public function getId($pseudo) {
 		$q = $this->_db->query('SELECT COUNT(*) AS nb FROM users WHERE pseudo = '.'\''.$pseudo.'\'') or die(print_r($this->_db->errorInfo()));
 		$data = $q->fetch();
-		if ($data['nb'] == 0) throw new Exception('Pseudo inconnu');
+		if ($data['nb'] == 0) return false;
 		$q = $this->_db->query('SELECT id FROM users WHERE pseudo = '.'\''.$pseudo.'\'') or die(print_r($this->_db->errorInfo()));
 		$data = $q->fetch();
 		$q->closeCursor();
@@ -39,15 +39,10 @@ class UsersManager extends Manager {
 	}
 	
 	public function getPseudo($id) {
-		$q = $this->_db->query('SELECT COUNT(*) AS nb FROM users WHERE id = '.$id) or die(print_r($this->_db->errorInfo()));
+		$q = $this->_db->query('SELECT pseudo FROM users WHERE id = '.$id) or die(print_r($this->_db->errorInfo()));
 		$data = $q->fetch();
-		if ($data['nb'] == 0) throw new Exception('Id utilisateur n\'existe pas');
-		else {
-			$q = $this->_db->query('SELECT pseudo FROM users WHERE id = '.$id) or die(print_r($this->_db->errorInfo()));
-			$data = $q->fetch();
-			$q->closeCursor();
-			return $data['pseudo'];
-		}
+		$q->closeCursor();
+		return $data['pseudo'];
 	}
 	
 	public function getPass($pseudo) {

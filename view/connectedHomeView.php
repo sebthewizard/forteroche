@@ -34,7 +34,7 @@
 	<img src="public/images/home.jpg" class="img-fluid" alt="home image">
 	<div id="hello-register-container">
 		<div id="hello-register-content">
-			<h2>Bienvenue sur mon blog</h2>
+			<h2>Bonne lecture <?= $_SESSION['pseudo']?></h2>
 		</div>
 	</div>
 </section>
