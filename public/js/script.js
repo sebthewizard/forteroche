@@ -1,4 +1,9 @@
 window.onload = function() {
+	
+	tinymce.init({
+    	selector: '#editserial',
+  	});
+	
 	// function to close burger menu after a click on an element 
 	$(function() { 
      	var navMain = $(".navbar-collapse");

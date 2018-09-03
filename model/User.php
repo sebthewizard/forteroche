@@ -33,29 +33,8 @@ class User {
 	public function email() {return $this->_email;}
 	
 	// Setters
-	public function setId($id) {
-		$id = (int) $id;
-    	if ($id > 0) {$this->_id = $id;}
-		else throw new Exception('Id utilisateur non valide');
-  	}
-
-	public function setPseudo($pseudo) {
-    	if (is_string($pseudo)) {$this->_pseudo = $pseudo;}
-		else throw new Exception('Votre pseudo doit être une chaîne de caractères');
-  	}
-	
-	public function setPasswd($passwd) {
-    	if (is_string($passwd)) {$this->_passwd = $passwd;}
-		else throw new Exception('Votre mot de passe doit être une chaîne de caractères');
-  	}
-
-	public function setAdmin($admin) {
-		$admin = (int) $admin;
-    	if ($admin >= 0) {$this->_admin = $admin;}
-  	}
-	
-	public function setEmail($email) {
-    	$this->_email = $email;
-  	}
-	
+	public function setPseudo($pseudo) {$this->_pseudo = $pseudo;}
+	public function setPasswd($passwd) {$this->_passwd = $passwd;}
+	public function setAdmin($admin) {$this->_admin = $admin;}
+	public function setEmail($email) {$this->_email = $email;}
 }

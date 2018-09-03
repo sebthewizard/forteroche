@@ -26,7 +26,32 @@ try {
 	}
 	if (isset($_GET['action']) && $_GET['action'] == 'registeruser') {
 		addUser();
-	}	
+	}
+////////////////////////////////////////////////////////////////////////////
+	if (isset($_GET['action']) && $_GET['action'] == 'admin') {
+		adminHome();
+	}
+	if (isset($_GET['action']) && $_GET['action'] == 'serialnew') {
+		newSerial('',0);
+	}
+	if (isset($_GET['action']) && $_GET['action'] == 'registerserial') {
+		addSerial();
+	}
+	if (isset($_GET['action']) && $_GET['action'] == 'chooseserialupdate') {
+		chooseSerialToUpdate();
+	}
+	if (isset($_GET['action']) && $_GET['action'] == 'serialtoupdate') {
+		serialToUpdate();
+	}
+	if (isset($_GET['action']) && $_GET['action'] == 'updateserial') {
+		updateSerial();
+	}
+	if (isset($_GET['action']) && $_GET['action'] == 'chooseserialdelete') {
+		chooseSerialToDelete();
+	}
+	if (isset($_GET['action']) && $_GET['action'] == 'serialtodelete') {
+		deleteSerial();
+	}
 }
 catch(Exception $e) {
 	switch ($e->getCode()) {
@@ -35,6 +60,9 @@ catch(Exception $e) {
 			break;
 		case 3: case 4: case 5:
 			register($e->getMessage(), $e->getCode());
+			break;
+		case 101: case 102:
+			newSerial($e->getMessage(), $e->getCode());
 			break;
 	}
 }
@@ -45,3 +73,8 @@ catch(Exception $e) {
 // 3 : pseudo inconnu ou invalide ou déja utilisé lors de l'enregistrement d'un nouvel utilisateur
 // 4 : mot de passe invalide ou différents lors de l'enregistrement d'un nouvel utilisateur
 // 5 : email invalide lors de l'enregistrement d'un nouvel utilisateur
+// 101 : numéro d'épisode inconnu ou invalide ou déja utilisé lors de l'enregistrement d'un nouvel épisode
+// 102 : titre d'épisode inconnu ou invalide lord de l'enregistrement d'un nouvel épisode
+
+
+
