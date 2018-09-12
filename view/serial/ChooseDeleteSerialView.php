@@ -18,10 +18,10 @@
       			<a class="nav-link" href="index.php?action=serialnew">Nouveau</a>
     		</li>
     		<li class="nav-item">
-      			<a class="nav-link" href="index.php?action=chooseserialupdate">Modifier</a>
+      			<a class="nav-link" href="index.php?action=chooseserialtoupdate">Modifier</a>
     		</li>
 			<li class="nav-item">
-      			<a class="nav-link" href="index.php?action=chooseserialdelete">Supprimer</a>
+      			<a class="nav-link" href="index.php?action=chooseserialtodelete">Supprimer</a>
     		</li>
 			<li class="nav-item">
       			<a class="nav-link" href="index.php?action=serialcomment">Commentaires</a>
@@ -36,13 +36,24 @@
 	<img src="public/images/home.jpg" class="img-fluid" alt="home image">
 	<div id="hello-register-container">
 		<div id="hello-register-content">
-			<h2>Bonne ecriture <?= $_SESSION['pseudo']?></h2>
+			<h2>Choisir un épisode à supprimer</h2>
+			<form method="post" action="index.php?action=serialdelete">
+				<div class="form-group">
+    				<label for="numserial">Liste des épisodes</label><br>
+    				<select name="numserial" id ="numserial">
+						<?php
+						while ($data = $q->fetch()) {
+							echo "<option value=".$data['serial_id'].">".$data['serial_number']." ".$data['serial_title']."</option>";
+						}
+						?>
+					</select>
+  				</div>
+  				<button type="submit" class="btn btn-success">Supprimer</button>
+			</form>
 		</div>
 	</div>
 </section>
-
-
-
 <?php $sectionMainContent = ob_get_clean(); ?>
 
-<?php require('template.php'); ?>
+
+<?php require('SerialTemplateView.php'); ?>	

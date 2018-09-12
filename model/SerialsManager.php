@@ -29,24 +29,38 @@ class SerialsManager extends Manager {
 		return true;
 	}
 	
-	public function listSerials() {
-		$q = $this->_db->query('SELECT * FROM serials') or die(print_r($this->_db->errorInfo()));
+	public function all() {
+		$q = $this->_db->query('SELECT se.id serial_id,
+										us.pseudo user_pseudo,
+										se.content serial_content,
+										se.number serial_number,
+										se.title serial_title,
+										DATE_FORMAT(se.creation_date, "le %d/%m/%Y à %Hh%imin%ss") serial_creation_date,
+										DATE_FORMAT(se.last_update_date, "le %d/%m/%Y à %Hh%imin%ss") serial_last_update_date
+										FROM serials se
+										INNER JOIN users us
+										ON us.id = se.id_user
+										ORDER BY serial_creation_date DESC
+										') or die(print_r($this->_db->errorInfo()));
 		return $q;
 	}
 	
-	public function getSerial($id) {
-		$q = $this->_db->query('SELECT * FROM serials WHERE id = '.$id) or die(print_r($this->_db->errorInfo()));
+	public function get($id) {
+		$q = $this->_db->query('SELECT id, id_user, content, number, title,
+										DATE_FORMAT(creation_date, "le %d/%m/%Y à %Hh%imin%ss") crea_date,
+										DATE_FORMAT(last_update_date, "le %d/%m/%Y à %Hh%imin%ss") la_upda_date
+										FROM serials WHERE id = '.$id) or die(print_r($this->_db->errorInfo()));
 		$data = $q->fetch();
 		$q->closeCursor();
 		return $data;
 	}
 	
-	public function updateSerial($id, $content) {
+	public function update($id, $content) {
 		$q = $this->_db->prepare('UPDATE serials SET content = :nvcontent, last_update_date = NOW() WHERE id = '.$id) or die(print_r($this->_db->errorInfo()));
 		$q->execute(array('nvcontent' => $content)) or die(print_r($this->_db->errorInfo()));
 	}
 	
-	public function deleteSerial($id) {
+	public function delete($id) {
 		$q = $this->_db->query('DELETE FROM serials WHERE id = '.$id) or die(print_r($this->_db->errorInfo()));
 	}
 }

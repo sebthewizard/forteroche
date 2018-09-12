@@ -18,10 +18,10 @@
       			<a class="nav-link" href="index.php?action=serialnew">Nouveau</a>
     		</li>
     		<li class="nav-item">
-      			<a class="nav-link" href="index.php?action=chooseserialupdate">Modifier</a>
+      			<a class="nav-link" href="index.php?action=chooseserialtoupdate">Modifier</a>
     		</li>
 			<li class="nav-item">
-      			<a class="nav-link" href="index.php?action=chooseserialdelete">Supprimer</a>
+      			<a class="nav-link" href="index.php?action=chooseserialtodelete">Supprimer</a>
     		</li>
 			<li class="nav-item">
       			<a class="nav-link" href="index.php?action=serialcomment">Commentaires</a>
@@ -36,19 +36,29 @@
 	<img src="public/images/home.jpg" class="img-fluid" alt="home image">
 	<div id="hello-register-container">
 		<div id="hello-register-content">
-			<h2>Choisir un épisode à modifier</h2>
-			<form method="post" action="index.php?action=serialtoupdate">
+			<h2>Rédaction d'un épisode</h2>
+			<form method="post" action="index.php?action=registerserial">
 				<div class="form-group">
-    				<label for="numserial">Liste des épisodes</label><br>
-    				<select name="numserial" id ="numserial">
-						<?php
-						while ($data = $q->fetch()) {
-							echo "<option value=".$data['id'].">".$data['number']." ".$data['title']."</option>";
-						}
-						?>
-					</select>
+    				<label for="numserial">Numéro de l'épisode</label>
+    				<input type="number" class="form-control" id="numserial" name="numserial" required />
+					<?php
+					if ($errorCode == 101)
+						echo "<span class='error'><strong>".$errorMessage."</strong></span>";
+					?>
   				</div>
-  				<button type="submit" class="btn btn-success">Sélectionner</button>
+				<div class="form-group">
+    				<label for="titleserial">Titre de l'épisode</label>
+    				<input type="text" class="form-control" name="titleserial" id="titleserial" required />
+					<?php
+					if ($errorCode == 102)
+						echo "<span class='error'><strong>".$errorMessage."</strong></span>";
+					?>
+  				</div>
+				<div class="form-group">
+    				<label for="editserial">Rédaction de l'épisode</label><br>
+    				<textarea name="editserial" id="editserial"></textarea>
+  				</div>
+  				<button type="submit" class="btn btn-success">Enregistrer</button>
 			</form>
 		</div>
 	</div>
@@ -56,4 +66,4 @@
 <?php $sectionMainContent = ob_get_clean(); ?>
 
 
-<?php require('template.php'); ?>	
+<?php require('SerialTemplateView.php'); ?>	
