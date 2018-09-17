@@ -14,3 +14,13 @@ function addComment() {
 		}
 	header("Location: index.php?action=readserial&serialId=".$_POST['serialId']);
 }
+
+function signalComment($commentId, $serialId) {
+	$manager = new CommentsManager();
+	$manager->changeSignaled($commentId);
+	header("Location: index.php?action=readserial&serialId=".$serialId);
+}
+
+function manageComment() {
+	require('view/serial/SerialCommentView.php');
+}

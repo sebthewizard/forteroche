@@ -26,6 +26,7 @@ class CommentsManager extends Manager {
 	public function getFromSerial($serialId) {
 		$q = $this->_db->prepare('SELECT us.pseudo user_pseudo,
 										co.id comment_id,
+										co.signaled comment_signaled,
 										DATE_FORMAT(co.creation_date, "le %d/%m/%Y à %Hh%imin%ss") comment_date,
 										co.content comment_content
 								FROM comments co
@@ -35,5 +36,14 @@ class CommentsManager extends Manager {
 								ORDER BY comment_date DESC');
 		$q->execute(array('id_serial' => $serialId)) or die(print_r($this->_db->errorInfo()));
 		return $q;
+	}
+	
+	public function changeSignaled($commentId) {
+		$q = $this->_db->query('SELECT signaled FROM comments WHERE id= '.$commentId) or die(print_r($this->_db->errorInfo()));
+		$data = $q->fetch();
+		if ($data['signaled'] == 0) $nvsignal = 1;
+		else $nvsignal = 0;
+		$q = $this->_db->prepare('UPDATE comments SET signaled = :nvsignal WHERE id = '.$commentId);
+		$q->execute(array('nvsignal' => $nvsignal)) or die(print_r($this->_db->errorInfo()));
 	}
 }

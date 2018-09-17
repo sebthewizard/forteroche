@@ -14,9 +14,6 @@
 		</div>
 	</div>
 </section>
-
-
-
 <?php $sectionMainContent = ob_get_clean(); ?>
 
 

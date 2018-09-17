@@ -51,7 +51,10 @@ try {
 	
 	// Serial
 	if (isset($_GET['action']) && $_GET['action'] == 'serialnew') {
-		newSerial('',0);
+		if (isset($_GET['new']) && $_GET['new'] == '1')
+			newSerial('',0,1);
+		else
+			newSerial('',0,0);
 	}
 	
 	if (isset($_GET['action']) && $_GET['action'] == 'registerserial') {
@@ -62,11 +65,7 @@ try {
 		chooseSerialToUpdate();
 	}
 	
-	if (isset($_GET['action']) && $_GET['action'] == 'serialtoupdate') {
-		serialToUpdate();
-	}
-	
-	if (isset($_GET['action']) && $_GET['action'] == 'updateserial') {
+	if (isset($_GET['action']) && $_GET['action'] == 'serialupdate') {
 		updateSerial();
 	}
 	if (isset($_GET['action']) && $_GET['action'] == 'chooseserialtodelete') {
@@ -81,6 +80,14 @@ try {
 		addComment();
 	}
 	
+	if (isset($_GET['action']) && $_GET['action'] == 'signalcomment') {
+		signalComment($_POST['commentId'], $_POST['commentSerialId']);
+	}
+	
+	if (isset($_GET['action']) && $_GET['action'] == 'serialcomment') {
+		manageComment();
+	}
+	
 }
 
 catch(Exception $e) {
@@ -91,8 +98,8 @@ catch(Exception $e) {
 		case 3: case 4: case 5:
 			register($e->getMessage(), $e->getCode());
 			break;
-		case 101: case 102:
-			newSerial($e->getMessage(), $e->getCode());
+		case 101: case 102: case 103:
+			newSerial($e->getMessage(), $e->getCode(),0);
 			break;
 		case 201:
 			echo $e->getMessage();
@@ -108,6 +115,7 @@ catch(Exception $e) {
 // 5 : email invalide lors de l'enregistrement d'un nouvel utilisateur
 // 101 : numéro d'épisode inconnu ou invalide ou déja utilisé lors de l'enregistrement d'un nouvel épisode
 // 102 : titre d'épisode inconnu ou invalide lord de l'enregistrement d'un nouvel épisode
+// 201 : Le commentaire à ajouter n'existe pas
 
 
 

@@ -3,13 +3,6 @@
 
 <head>
 	<title><?= $title ?></title>
-<!--
-	<meta name="description" content="Velo'v le service de location de la ville de lyon. Pour découvrir le service ou explorer la ville, pour un trajet, une journée ou trois jours" />
-	<meta property="og:title" content="Velo'v" />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="http://www.thewizard.compteweb.com/velov/" />
-	<meta property="og:image" content="http://www.thewizard.compteweb.com/velov/images/velov.png" />
--->
     <meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" />
@@ -19,11 +12,54 @@
 
 <body>
 	
-	<header>
-		<?= $headerContent ?>
+	<header class="sticky-top">
+		<div class="jumbotron jumbotron-fluid jumbotron-header-img">
+ 			<div class="container d-flex justify-content-center align-items-center flex-column">
+				<div id="textJumbotron">
+    				<h1>Jean Forteroche</h1> 
+    				<h3>Gestion des épisodes</h3>
+				</div>
+  			</div>
+		</div>
+		<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+			<div class="container">
+				<a class="navbar-brand" href="index.php">
+					<img src="public/images/feather.png" alt="feather logo">
+					<span> <?= $_SESSION['pseudo'] ?></span>
+				</a>
+			<button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    			<span class="navbar-toggler-icon"></span>
+  			</button>
+				<div class="collapse navbar-collapse" id="collapsibleNavbar">
+  					<ul class="navbar-nav">
+    					<li class="nav-item">
+							<a class='nav-link' href='index.php?action=disconnection'>Déconnection</a>
+    					</li>
+    					<li class="nav-item">
+      						<a class="nav-link" href="index.php?action=serialnew">Nouveau</a>
+    					</li>
+						<li class="nav-item">
+      						<a class="nav-link" href="index.php?action=chooseserialtoupdate">Modifier</a>
+    					</li>
+						<li class="nav-item">
+      						<a class="nav-link" href="index.php?action=chooseserialtodelete">Supprimer</a>
+    					</li>
+						<li class="nav-item">
+      						<a class="nav-link" href="index.php?action=serialcomment">Commentaires</a>
+    					</li>
+						<?php
+						if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
+							echo "<li class='nav-item'>";
+								echo "<a class='nav-link' href='index.php?action=admin'>Administrer</a>";
+							echo "</li>";
+						}
+						?>
+  					</ul>
+				</div>
+			</div>
+		</nav>
 	</header>
 	
-	<span class="menu_height"></span>
 	<?= $sectionMainContent ?>
 
 	

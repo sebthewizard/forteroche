@@ -172,6 +172,163 @@ p, h1, h2, h3, h4 {
 	box-shadow: 0px -30px 30px -10px white;
 }
 
+/* ReadSerialView */
+
+#content-serial {
+	background-color: white;
+	padding: 20px;
+}
+
+#send-comment {
+	font-family: RobotoLight, Helvetica, sans-serif;
+	font-size: 1.2rem;
+	color: #28a745;
+	text-align: center;
+	margin: 30px 0;
+}
+
+.user-comment {
+ 	overflow: hidden;
+ 	text-align: center;
+	color: #28a745;
+	margin-top: 10px;
+}
+
+.user-comment::before, .user-comment::after {
+ 	content: "";
+ 	display: inline-block;
+ 	height: 3px;
+ 	position: relative;
+ 	vertical-align: middle;
+ 	width: 50%;
+	background-color: #28a745;
+}
+
+.user-comment::before {
+	right: 0.5rem;
+ 	margin-left: -50%
+}
+
+.user-comment::after {
+	left: 0.5rem;
+ 	margin-right: -50%;
+}
+
+.comment-content {
+	font-family: RobotoLight, Helvetica, sans-serif;
+	color: white;
+}
+
+/* adminHomeView */
+
+#adminHome h2 {
+	font-family: RobotoBlack, Helvetica, sans-serif;
+	text-align: center;
+	text-transform: uppercase;
+	color: #28a745;
+	margin-bottom: 20px;
+}
+
+#adminHome h4 {
+	font-family: RobotoLight, Helvetica, sans-serif;
+	color: #28a745;
+}
+
+#adminHome .submit-button {
+	background-color: #343a40;
+	border: none;
+}
+
+#adminHome .submit-button:focus {
+	box-shadow: none;
+}
+
+#adminHome p {
+	font-family: RobotoLight, Helvetica, sans-serif;
+	text-align: center;
+	color: white;
+}
+
+/* NewSerialView */
+
+#adminNewSerial h2 {
+	font-family: RobotoBlack, Helvetica, sans-serif;
+	text-align: center;
+	text-transform: uppercase;
+	color: #28a745;
+	margin-bottom: 20px;
+}
+
+#adminNewSerial label {
+	color: white;
+}
+
+#adminNewSerial .form-group {
+	text-align: center;
+}
+
+#editserial {
+	width: 100%;
+}
+
+#newSerialInfo {
+	color: #28a745;
+}
+
+/* ChooseDeleteSerialView */
+
+#adminDeleteSerial h2 {
+	font-family: RobotoBlack, Helvetica, sans-serif;
+	text-align: center;
+	text-transform: uppercase;
+	color: #28a745;
+	margin-bottom: 20px;
+}
+
+#adminDeleteSerial label {
+	color: white;
+}
+
+#adminDeleteSerial .form-group {
+	text-align: center;
+}
+
+#deleteSerialInfo {
+	color: #28a745;
+}
+
+/* ChooseUpdateSerialView */
+
+#adminUpdateSerial h2 {
+	font-family: RobotoBlack, Helvetica, sans-serif;
+	text-align: center;
+	text-transform: uppercase;
+	color: #28a745;
+	margin-bottom: 20px;
+}
+
+#adminUpdateSerial label {
+	color: white;
+}
+
+#adminUpdateSerial .form-group {
+	text-align: center;
+}
+
+#updateSerialInfo {
+	color: #28a745;
+}
+
+/* SerialCommentView */
+
+#adminCommentSerial h2 {
+	font-family: RobotoBlack, Helvetica, sans-serif;
+	text-align: center;
+	text-transform: uppercase;
+	color: #28a745;
+	margin-bottom: 20px;
+}
+
 /* FOOTER */
 footer {
 	background-color: #343a40;

@@ -1,6 +1,6 @@
 <?php
 
-function newSerial($errorMessage, $errorCode) {
+function newSerial($errorMessage, $errorCode, $new) {
 	require('view/serial/NewSerialView.php');
 }
 
@@ -19,8 +19,8 @@ function addSerial() {
 	$serial = new Serial($data);
 	$manager = new SerialsManager();
 	$num = $manager->add($serial);
-	if ($num == false) throw new Exception('Numéro épisode déja utilisé',105);
-	header('Location: index.php?action=admin');
+	if ($num == false) throw new Exception('Numéro épisode déja utilisé',103);
+	header('Location: index.php?action=serialnew&new=1');
 }
 
 function chooseSerialToUpdate() {
@@ -29,16 +29,10 @@ function chooseSerialToUpdate() {
 	require('view/serial/ChooseUpdateSerialView.php');
 }
 
-function serialToUpdate() {
-	$manager = new SerialsManager();
-	$data = $manager->get($_POST['numserial']);
-	require('view/serial/UpdateSerialView.php');
-}
-
 function updateSerial() {
 	$manager = new SerialsManager();
-	$manager->update($_POST['serialid'],$_POST['editserial']);
-	header('Location: index.php?action=admin');
+	$manager->update($_POST['serialIdToUpdate'],$_POST['editserial']);
+	header('Location: index.php?action=chooseserialtoupdate&update=1');
 }
 
 function chooseSerialToDelete() {
@@ -49,6 +43,6 @@ function chooseSerialToDelete() {
 
 function deleteSerial() {
 	$manager = new SerialsManager();
-	$manager->delete($_POST['numserial']);
-	header('Location: index.php?action=admin');
+	$manager->delete($_POST['serialIdToDelete']);
+	header('Location: index.php?action=chooseserialtodelete&delete=1');
 }

@@ -61,6 +61,7 @@ class SerialsManager extends Manager {
 	}
 	
 	public function delete($id) {
+		$q = $this->_db->query('DELETE FROM comments WHERE id_serial = '.$id) or die(print_r($this->_db->errorInfo()));
 		$q = $this->_db->query('DELETE FROM serials WHERE id = '.$id) or die(print_r($this->_db->errorInfo()));
 	}
 }

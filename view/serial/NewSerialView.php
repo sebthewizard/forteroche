@@ -1,65 +1,52 @@
-<?php $title = 'Jean Forteroche ecriture'; ?>
+<?php $title = 'Jean Forteroche écriture'; ?>
 
 <?php ob_start(); ?>
-<nav class="navbar navbar-expand-md bg-light fixed-top">
-	<a class="navbar-brand d-flex" href="index.php">
-    	<img src="public/images/feather.png" alt="feather logo">
-		<h1 class="align-self-center" id="title">Jean Forteroche</h1>
-  	</a>
-	<button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    	<span class="navbar-toggler-icon"></span>
-  	</button>
-	<div class="collapse navbar-collapse" id="collapsibleNavbar">
-  		<ul class="navbar-nav">
-    		<li class="nav-item">
-      			<a class="nav-link" href="index.php?action=disconnection">Déconnection</a>
-    		</li>
-    		<li class="nav-item">
-      			<a class="nav-link" href="index.php?action=serialnew">Nouveau</a>
-    		</li>
-    		<li class="nav-item">
-      			<a class="nav-link" href="index.php?action=chooseserialtoupdate">Modifier</a>
-    		</li>
-			<li class="nav-item">
-      			<a class="nav-link" href="index.php?action=chooseserialtodelete">Supprimer</a>
-    		</li>
-			<li class="nav-item">
-      			<a class="nav-link" href="index.php?action=serialcomment">Commentaires</a>
-    		</li>
-  		</ul>
-	</div>
-</nav>
-<?php $headerContent = ob_get_clean(); ?>
-
-<?php ob_start(); ?>
-<section id="hello-register">
-	<img src="public/images/home.jpg" class="img-fluid" alt="home image">
-	<div id="hello-register-container">
-		<div id="hello-register-content">
-			<h2>Rédaction d'un épisode</h2>
-			<form method="post" action="index.php?action=registerserial">
-				<div class="form-group">
-    				<label for="numserial">Numéro de l'épisode</label>
-    				<input type="number" class="form-control" id="numserial" name="numserial" required />
-					<?php
-					if ($errorCode == 101)
-						echo "<span class='error'><strong>".$errorMessage."</strong></span>";
-					?>
-  				</div>
-				<div class="form-group">
-    				<label for="titleserial">Titre de l'épisode</label>
-    				<input type="text" class="form-control" name="titleserial" id="titleserial" required />
-					<?php
-					if ($errorCode == 102)
-						echo "<span class='error'><strong>".$errorMessage."</strong></span>";
-					?>
-  				</div>
-				<div class="form-group">
-    				<label for="editserial">Rédaction de l'épisode</label><br>
-    				<textarea name="editserial" id="editserial"></textarea>
-  				</div>
-  				<button type="submit" class="btn btn-success">Enregistrer</button>
-			</form>
+<section>
+	<div class="container" id="adminNewSerial">
+		<?php
+		if ($new == 1) {
+		?>
+		<div class="row">
+			<div class="col-lg-offset-1 col-lg-2"></div>
+				<div class="col-lg-8">
+					<div class="d-flex justify-content-center border border-success rounded p-2 m-4" id="newSerialInfo">
+						<p><strong>Nouvel épisode publié </strong></p>
+					</div>
+				</div>
+			<div class="col-lg-offset-1 col-lg-2"></div>
+		</div>
+		<?php
+		}
+		?>
+		<h2>écrire un épisode</h2>
+		<div class="row">
+			<div class="col-lg-offset-1 col-lg-1"></div>
+			<div class="col-lg-10">
+				<form class="d-flex flex-column border border-success rounded p-2" method="post" action="index.php?action=registerserial">
+					<div class="form-group align-self-center">
+    					<label for="numserial">Numéro de l'épisode</label>
+    					<input type="number" class="form-control" id="numserial" name="numserial" required />
+						<?php
+						if ($errorCode == 101 || $errorCode == 103)
+							echo "<span class='error'><strong>".$errorMessage."</strong></span>";
+						?>
+  					</div>
+					<div class="form-group">
+    					<label for="titleserial">Titre de l'épisode</label>
+    					<input type="text" class="form-control" name="titleserial" id="titleserial" required />
+						<?php
+						if ($errorCode == 102)
+							echo "<span class='error'><strong>".$errorMessage."</strong></span>";
+						?>
+  					</div>
+					<div class="form-group flex-grow-1">
+    					<label for="editserial">Rédaction de l'épisode</label><br>
+    					<textarea rows="15" name="editserial" id="editserial"></textarea>
+  					</div>
+  					<button type="submit" class="btn btn-success align-self-center">Enregistrer</button>
+				</form>
+			</div>
+			<div class="col-lg-offset-1 col-lg-1"></div>
 		</div>
 	</div>
 </section>

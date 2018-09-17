@@ -1,44 +1,50 @@
 <?php $title = 'Jean Forteroche administration'; ?>
 
-
 <?php ob_start(); ?>
-<nav class="navbar navbar-expand-md bg-light fixed-top">
-	<a class="navbar-brand d-flex" href="index.php">
-    	<img src="public/images/feather.png" alt="feather logo">
-		<h1 class="align-self-center" id="title">Jean Forteroche</h1>
-  	</a>
-	<button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    	<span class="navbar-toggler-icon"></span>
-  	</button>
-	<div class="collapse navbar-collapse" id="collapsibleNavbar">
-  		<ul class="navbar-nav">
-    		<li class="nav-item">
-      			<a class="nav-link" href="index.php?action=disconnection">Déconnection</a>
-    		</li>
-    		<li class="nav-item">
-      			<a class="nav-link" href="index.php?action=serialnew">Nouveau</a>
-    		</li>
-    		<li class="nav-item">
-      			<a class="nav-link" href="index.php?action=chooseserialtoupdate">Modifier</a>
-    		</li>
-			<li class="nav-item">
-      			<a class="nav-link" href="index.php?action=chooseserialtodelete">Supprimer</a>
-    		</li>
-			<li class="nav-item">
-      			<a class="nav-link" href="index.php?action=serialcomment">Commentaires</a>
-    		</li>
-  		</ul>
-	</div>
-</nav>
-<?php $headerContent = ob_get_clean(); ?>
-
-
-<?php ob_start(); ?>
-<section id="hello-register">
-	<img src="public/images/home.jpg" class="img-fluid" alt="home image">
-	<div id="hello-register-container">
-		<div id="hello-register-content">
-			<h2>Bonne ecriture <?= $_SESSION['pseudo']?></h2>
+<section>
+	<div class="container" id="adminHome">
+		<h2>ACCUEIL ADMINISTRATION</h2>
+		<div class="row">
+			<div class="col-lg-offset-1 col-lg-1"></div>
+			<div class="col-lg-4">
+				<div class="d-flex flex-column align-items-center border border-success rounded p-2 m-2">
+					<form method="post" action="index.php?action=serialnew">
+						<button type="submit" class="btn btn-success submit-button"><h4>Nouveau</h4></button>
+					</form>
+					<p>Rédiger un nouvel épisode</p>
+				</div>
+			</div>
+			<div class="col-lg-offset-2 col-lg-2"></div>
+			<div class="col-lg-4">
+				<div class="d-flex flex-column align-items-center border border-success rounded p-2 m-2">
+					<form method="post" action="index.php?action=chooseserialtoupdate">
+						<button type="submit" class="btn btn-success submit-button"><h4>Modifier</h4></button>
+					</form>
+					<p>Apporter des changements à un épisode</p>
+				</div>
+			</div>
+			<div class="col-lg-offset-1 col-lg-1"></div>
+		</div>
+		<div class="row">
+			<div class="col-lg-offset-1 col-lg-1"></div>
+			<div class="col-lg-4">
+				<div class="d-flex flex-column align-items-center border border-success rounded p-2 m-2">
+					<form method="post" action="index.php?action=chooseserialtodelete">
+						<button type="submit" class="btn btn-success submit-button"><h4>Supprimer</h4></button>
+					</form>
+					<p>Supprimer un épisode</p>
+				</div>
+			</div>
+			<div class="col-lg-offset-2 col-lg-2"></div>
+			<div class="col-lg-4">
+				<div class="d-flex flex-column align-items-center border border-success rounded p-2 m-2">
+					<form method="post" action="index.php?action=serialcomment">
+						<button type="submit" class="btn btn-success submit-button"><h4>Commentaires</h4></button>
+					</form>
+					<p>Gérer les commentaires</p>
+				</div>
+			</div>
+			<div class="col-lg-offset-1 col-lg-1"></div>
 		</div>
 	</div>
 </section>
