@@ -97,11 +97,22 @@ function adminHome() {
 
 function readSerial($serialId) {
 	$managerComment = new CommentsManager();
-	$q = $managerComment->getFromSerial($serialId);
+	$q = $managerComment->getFromSerial($serialId,0,0);
 	$managerSerial = new SerialsManager();
 	$dataSerial = $managerSerial->get($serialId);
 	$managerUser = new UsersManager();
 	$pseudo = $managerUser->getPseudo($dataSerial['id_user']);
+	if (isset($_GET['pageNum'])) {
+    	$pageNum = $_GET['pageNum'];
+    } else {
+    	$pageNum = 1;
+    }
+	$commentsPerPage = 7;
+	$offset = ($pageNum-1) * $commentsPerPage;
+	$numberOfPages = ceil($q->rowCount() / $commentsPerPage);
+	$q = $managerComment->getFromSerial($serialId,$offset,$commentsPerPage);
+	
+	
 	require('view/user/ReadSerialView.php');
 }
 

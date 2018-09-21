@@ -41,7 +41,7 @@ try {
 		adminHome();
 	}
 	
-	if (isset($_GET['action']) && $_GET['action'] == 'readserial') {
+	if (isset($_GET['action']) && $_GET['action'] == 'readserial') {		
 		if (isset($_GET['serialId']))
 			readSerial($_GET['serialId']);
 		else
@@ -85,7 +85,17 @@ try {
 	}
 	
 	if (isset($_GET['action']) && $_GET['action'] == 'serialcomment') {
+		if (isset($_GET['sort']))
+			$_POST['sortComment'] = $_GET['sort'];
 		manageComment();
+	}
+	
+	if (isset($_GET['action']) && $_GET['action'] == 'commentdelete') {
+		deleteComment();
+	}
+	
+	if (isset($_GET['action']) && $_GET['action'] == 'commentvalidate') {
+		validateComment();
 	}
 	
 }

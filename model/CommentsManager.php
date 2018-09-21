@@ -23,10 +23,16 @@ class CommentsManager extends Manager {
 		)) or die(print_r($this->_db->errorInfo()));
 	}
 	
-	public function getFromSerial($serialId) {
-		$q = $this->_db->prepare('SELECT us.pseudo user_pseudo,
+	public function deleteComment($id) {
+		$q = $this->_db->query('DELETE FROM comments WHERE id = '.$id) or die(print_r($this->_db->errorInfo()));
+	}
+	
+	public function getFromSerial($serialId, $offset, $commentsPerPage) {
+		if ($commentsPerPage == 0) {
+			$q = $this->_db->prepare('SELECT us.pseudo user_pseudo,
 										co.id comment_id,
 										co.signaled comment_signaled,
+										co.validate comment_validated,
 										DATE_FORMAT(co.creation_date, "le %d/%m/%Y à %Hh%imin%ss") comment_date,
 										co.content comment_content
 								FROM comments co
@@ -34,16 +40,104 @@ class CommentsManager extends Manager {
 								ON us.id = co.id_user
 								WHERE co.id_serial = :id_serial
 								ORDER BY comment_date DESC');
-		$q->execute(array('id_serial' => $serialId)) or die(print_r($this->_db->errorInfo()));
+			$q->execute(array('id_serial' => $serialId)) or die(print_r($this->_db->errorInfo()));
+		}
+		else {
+			$q = $this->_db->prepare('SELECT us.pseudo user_pseudo,
+										co.id comment_id,
+										co.signaled comment_signaled,
+										co.validate comment_validated,
+										DATE_FORMAT(co.creation_date, "le %d/%m/%Y à %Hh%imin%ss") comment_date,
+										co.content comment_content
+								FROM comments co
+								INNER JOIN users us
+								ON us.id = co.id_user
+								WHERE co.id_serial = :id_serial
+								ORDER BY comment_date DESC
+								LIMIT :offset, :commentsPerPage');
+			$q->bindValue('id_serial', $serialId, PDO::PARAM_INT);
+			$q->bindValue('offset', $offset, PDO::PARAM_INT);
+			$q->bindValue('commentsPerPage', $commentsPerPage, PDO::PARAM_INT);
+			$q->execute() or die(print_r($this->_db->errorInfo()));
+		}
 		return $q;
 	}
 	
 	public function changeSignaled($commentId) {
-		$q = $this->_db->query('SELECT signaled FROM comments WHERE id= '.$commentId) or die(print_r($this->_db->errorInfo()));
-		$data = $q->fetch();
-		if ($data['signaled'] == 0) $nvsignal = 1;
-		else $nvsignal = 0;
+		$nvsignal = 1;
 		$q = $this->_db->prepare('UPDATE comments SET signaled = :nvsignal WHERE id = '.$commentId);
 		$q->execute(array('nvsignal' => $nvsignal)) or die(print_r($this->_db->errorInfo()));
+	}
+
+	public function changeCommentToValidated($commentId) {
+		$nvvalidate = 1;
+		$q = $this->_db->prepare('UPDATE comments SET validate = :nvvalidate WHERE id = '.$commentId);
+		$q->execute(array('nvvalidate' => $nvvalidate)) or die(print_r($this->_db->errorInfo()));
+	}
+	
+	
+	public function getAllCommentsNotValidated() {
+		$q = $this->_db->query('SELECT us.pseudo user_pseudo,
+										se.number serial_number,
+										co.id comment_id,
+										DATE_FORMAT(co.creation_date, "le %d/%m/%Y à %Hh%imin%ss") comment_date,
+										co.content comment_content
+								FROM comments co
+								INNER JOIN users us
+								ON us.id = co.id_user
+								INNER JOIN serials se
+								ON se.id = co.id_serial
+								WHERE co.validate = 0
+								ORDER BY comment_date DESC');
+		return $q;
+	}
+	
+	public function getAllCommentsNotValidatedOrderBySerial() {
+		$q = $this->_db->query('SELECT us.pseudo user_pseudo,
+										se.number serial_number,
+										co.id comment_id,
+										DATE_FORMAT(co.creation_date, "le %d/%m/%Y à %Hh%imin%ss") comment_date,
+										co.content comment_content
+								FROM comments co
+								INNER JOIN users us
+								ON us.id = co.id_user
+								INNER JOIN serials se
+								ON se.id = co.id_serial
+								WHERE co.validate = 0
+								ORDER BY serial_number DESC, comment_date DESC');
+		return $q;
+	}
+	
+	
+	public function getAllCommentsSignaledAndNotValidated() {
+		$q = $this->_db->query('SELECT us.pseudo user_pseudo,
+										se.number serial_number,
+										co.id comment_id,
+										DATE_FORMAT(co.creation_date, "le %d/%m/%Y à %Hh%imin%ss") comment_date,
+										co.content comment_content
+								FROM comments co
+								INNER JOIN users us
+								ON us.id = co.id_user
+								INNER JOIN serials se
+								ON se.id = co.id_serial
+								WHERE co.validate = 0 AND co.signaled = 1
+								ORDER BY comment_date DESC');
+		return $q;
+	}
+	
+	public function getAllCommentsSignaledAndNotValidatedOrderBySerial() {
+		$q = $this->_db->query('SELECT us.pseudo user_pseudo,
+										se.number serial_number,
+										co.id comment_id,
+										DATE_FORMAT(co.creation_date, "le %d/%m/%Y à %Hh%imin%ss") comment_date,
+										co.content comment_content
+								FROM comments co
+								INNER JOIN users us
+								ON us.id = co.id_user
+								INNER JOIN serials se
+								ON se.id = co.id_serial
+								WHERE co.validate = 0 AND co.signaled = 1
+								ORDER BY serial_number DESC, comment_date DESC');
+		return $q;
 	}
 }

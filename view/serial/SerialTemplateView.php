@@ -33,7 +33,7 @@
 				<div class="collapse navbar-collapse" id="collapsibleNavbar">
   					<ul class="navbar-nav">
     					<li class="nav-item">
-							<a class='nav-link' href='index.php?action=disconnection'>Déconnection</a>
+							<a class='nav-link' href='index.php?action=disconnection'>Déconnexion</a>
     					</li>
     					<li class="nav-item">
       						<a class="nav-link" href="index.php?action=serialnew">Nouveau</a>
