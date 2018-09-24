@@ -76,8 +76,9 @@ class CommentsManager extends Manager {
 	}
 	
 	
-	public function getAllCommentsNotValidated() {
-		$q = $this->_db->query('SELECT us.pseudo user_pseudo,
+	public function getAllCommentsNotValidated($offset, $commentsPerPage) {
+		if ($commentsPerPage == 0) {
+			$q = $this->_db->query('SELECT us.pseudo user_pseudo,
 										se.number serial_number,
 										co.id comment_id,
 										DATE_FORMAT(co.creation_date, "le %d/%m/%Y à %Hh%imin%ss") comment_date,
@@ -89,11 +90,31 @@ class CommentsManager extends Manager {
 								ON se.id = co.id_serial
 								WHERE co.validate = 0
 								ORDER BY comment_date DESC');
+		}
+		else {
+			$q = $this->_db->prepare('SELECT us.pseudo user_pseudo,
+										se.number serial_number,
+										co.id comment_id,
+										DATE_FORMAT(co.creation_date, "le %d/%m/%Y à %Hh%imin%ss") comment_date,
+										co.content comment_content
+								FROM comments co
+								INNER JOIN users us
+								ON us.id = co.id_user
+								INNER JOIN serials se
+								ON se.id = co.id_serial
+								WHERE co.validate = 0
+								ORDER BY comment_date DESC
+								LIMIT :offset, :commentsPerPage');
+			$q->bindValue('offset', $offset, PDO::PARAM_INT);
+			$q->bindValue('commentsPerPage', $commentsPerPage, PDO::PARAM_INT);
+			$q->execute() or die(print_r($this->_db->errorInfo()));
+		}
 		return $q;
 	}
 	
-	public function getAllCommentsNotValidatedOrderBySerial() {
-		$q = $this->_db->query('SELECT us.pseudo user_pseudo,
+	public function getAllCommentsNotValidatedOrderBySerial($offset, $commentsPerPage) {
+		if ($commentsPerPage == 0) {
+			$q = $this->_db->query('SELECT us.pseudo user_pseudo,
 										se.number serial_number,
 										co.id comment_id,
 										DATE_FORMAT(co.creation_date, "le %d/%m/%Y à %Hh%imin%ss") comment_date,
@@ -105,12 +126,32 @@ class CommentsManager extends Manager {
 								ON se.id = co.id_serial
 								WHERE co.validate = 0
 								ORDER BY serial_number DESC, comment_date DESC');
+		}
+		else {
+			$q = $this->_db->prepare('SELECT us.pseudo user_pseudo,
+										se.number serial_number,
+										co.id comment_id,
+										DATE_FORMAT(co.creation_date, "le %d/%m/%Y à %Hh%imin%ss") comment_date,
+										co.content comment_content
+								FROM comments co
+								INNER JOIN users us
+								ON us.id = co.id_user
+								INNER JOIN serials se
+								ON se.id = co.id_serial
+								WHERE co.validate = 0
+								ORDER BY serial_number DESC, comment_date DESC
+								LIMIT :offset, :commentsPerPage');
+			$q->bindValue('offset', $offset, PDO::PARAM_INT);
+			$q->bindValue('commentsPerPage', $commentsPerPage, PDO::PARAM_INT);
+			$q->execute() or die(print_r($this->_db->errorInfo()));
+		}
 		return $q;
 	}
 	
 	
-	public function getAllCommentsSignaledAndNotValidated() {
-		$q = $this->_db->query('SELECT us.pseudo user_pseudo,
+	public function getAllCommentsSignaledAndNotValidated($offset, $commentsPerPage) {
+		if ($commentsPerPage == 0) {
+			$q = $this->_db->query('SELECT us.pseudo user_pseudo,
 										se.number serial_number,
 										co.id comment_id,
 										DATE_FORMAT(co.creation_date, "le %d/%m/%Y à %Hh%imin%ss") comment_date,
@@ -122,11 +163,31 @@ class CommentsManager extends Manager {
 								ON se.id = co.id_serial
 								WHERE co.validate = 0 AND co.signaled = 1
 								ORDER BY comment_date DESC');
+		}
+		else {
+			$q = $this->_db->prepare('SELECT us.pseudo user_pseudo,
+										se.number serial_number,
+										co.id comment_id,
+										DATE_FORMAT(co.creation_date, "le %d/%m/%Y à %Hh%imin%ss") comment_date,
+										co.content comment_content
+								FROM comments co
+								INNER JOIN users us
+								ON us.id = co.id_user
+								INNER JOIN serials se
+								ON se.id = co.id_serial
+								WHERE co.validate = 0 AND co.signaled = 1
+								ORDER BY comment_date DESC
+								LIMIT :offset, :commentsPerPage');
+			$q->bindValue('offset', $offset, PDO::PARAM_INT);
+			$q->bindValue('commentsPerPage', $commentsPerPage, PDO::PARAM_INT);
+			$q->execute() or die(print_r($this->_db->errorInfo()));
+		}
 		return $q;
 	}
 	
-	public function getAllCommentsSignaledAndNotValidatedOrderBySerial() {
-		$q = $this->_db->query('SELECT us.pseudo user_pseudo,
+	public function getAllCommentsSignaledAndNotValidatedOrderBySerial($offset, $commentsPerPage) {
+		if ($commentsPerPage == 0) {
+			$q = $this->_db->query('SELECT us.pseudo user_pseudo,
 										se.number serial_number,
 										co.id comment_id,
 										DATE_FORMAT(co.creation_date, "le %d/%m/%Y à %Hh%imin%ss") comment_date,
@@ -138,6 +199,25 @@ class CommentsManager extends Manager {
 								ON se.id = co.id_serial
 								WHERE co.validate = 0 AND co.signaled = 1
 								ORDER BY serial_number DESC, comment_date DESC');
+		}
+		else {
+			$q = $this->_db->prepare('SELECT us.pseudo user_pseudo,
+										se.number serial_number,
+										co.id comment_id,
+										DATE_FORMAT(co.creation_date, "le %d/%m/%Y à %Hh%imin%ss") comment_date,
+										co.content comment_content
+								FROM comments co
+								INNER JOIN users us
+								ON us.id = co.id_user
+								INNER JOIN serials se
+								ON se.id = co.id_serial
+								WHERE co.validate = 0 AND co.signaled = 1
+								ORDER BY serial_number DESC, comment_date DESC
+								LIMIT :offset, :commentsPerPage');
+			$q->bindValue('offset', $offset, PDO::PARAM_INT);
+			$q->bindValue('commentsPerPage', $commentsPerPage, PDO::PARAM_INT);
+			$q->execute() or die(print_r($this->_db->errorInfo()));
+		}
 		return $q;
 	}
 }

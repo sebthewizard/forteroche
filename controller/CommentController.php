@@ -18,26 +18,51 @@ function addComment() {
 function signalComment($commentId, $serialId) {
 	$manager = new CommentsManager();
 	$manager->changeSignaled($commentId);
-	header("Location: index.php?action=readserial&serialId=".$serialId);
+	header("Location: index.php?action=readserial&pageNum=".$_GET['pageNum']."&serialId=".$serialId);
 }
 
 function manageComment() {
+	if (isset($_GET['sort']))
+			$_POST['sortComment'] = $_GET['sort'];
 	if (isset($_POST['sortComment']) && $_POST['sortComment'] == 1) {
 		$manager = new CommentsManager();
-		$q = $manager->getAllCommentsNotValidated();
+		$q = $manager->getAllCommentsNotValidated(0,0);
 	}
 	if (isset($_POST['sortComment']) && $_POST['sortComment'] == 2) {
 		$manager = new CommentsManager();
-		$q = $manager->getAllCommentsSignaledAndNotValidated();
+		$q = $manager->getAllCommentsSignaledAndNotValidated(0,0);
 	}
 	if (isset($_POST['sortComment']) && $_POST['sortComment'] == 3) {
 		$manager = new CommentsManager();
-		$q = $manager->getAllCommentsNotValidatedOrderBySerial();
+		$q = $manager->getAllCommentsNotValidatedOrderBySerial(0,0);
 	}
 	if (isset($_POST['sortComment']) && $_POST['sortComment'] == 4) {
 		$manager = new CommentsManager();
-		$q = $manager->getAllCommentsSignaledAndNotValidatedOrderBySerial();
+		$q = $manager->getAllCommentsSignaledAndNotValidatedOrderBySerial(0,0);
 	}
+	if (isset($_POST['sortComment'])) {
+		if (isset($_GET['pageNum'])) {
+    		$pageNum = $_GET['pageNum'];
+    	} else {
+    		$pageNum = 1;
+    	}
+		$commentsPerPage = 7;
+		$offset = ($pageNum-1) * $commentsPerPage;
+		$numberOfPages = ceil($q->rowCount() / $commentsPerPage);	
+		if ($_POST['sortComment'] == 1) {
+			$q = $manager->getAllCommentsNotValidated($offset,$commentsPerPage);
+		}
+		if ($_POST['sortComment'] == 2) {
+			$q = $manager->getAllCommentsSignaledAndNotValidated($offset,$commentsPerPage);
+		}
+		if ($_POST['sortComment'] == 3) {
+			$q = $manager->getAllCommentsNotValidatedOrderBySerial($offset,$commentsPerPage);
+		}
+		if ($_POST['sortComment'] == 4) {
+			$q = $manager->getAllCommentsSignaledAndNotValidatedOrderBySerial($offset,$commentsPerPage);
+		}
+	}
+	else $numberOfPages = 0;
 	require('view/serial/SerialCommentView.php');
 }
 

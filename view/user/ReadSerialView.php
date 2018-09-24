@@ -43,7 +43,7 @@
 				<p class="comment-content"><?= $data['comment_content'] ?></p>
 				<div class="d-flex justify-content-end">
 					<?php if ($data['comment_validated'] == 0) { ?>
-					<form method='post' action='index.php?action=signalcomment'>
+					<form method='post' action='index.php?action=signalcomment&amp;pageNum=<?= $pageNum ?>'>
 						<input type='hidden' id='commentId' name='commentId' value="<?= $data['comment_id'] ?>" />
 						<input type='hidden' id='commentSerialId' name='commentSerialId' value="<?= $serialId ?>" />
 						<?php
@@ -87,7 +87,7 @@
   		<li class="page-item disabled"><a class="page-link" href="#">Suivant</a></li>
 	<?php } else { $pageSuiv = $pageNum+1; ?>
 		<li class="page-item">
-			<a class="page-link" href="index.php?action=readserial&amp;serialId=<?= $serialId ?>&amp;pageNum=<?= $pageSuiv?>">Suivant</a>
+			<a class="page-link" href="index.php?action=readserial&amp;serialId=<?= $serialId ?>&amp;pageNum=<?= $pageSuiv ?>">Suivant</a>
 		</li>
 	<?php } ?>
 </ul>

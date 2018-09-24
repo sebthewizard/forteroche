@@ -13,7 +13,7 @@
 					</div>
 					<div class='d-flex justify-content-center flex-wrap'>
 						<form class="p-2" method='post' action='index.php?action=serialcomment'>
-							<input type='hidden' id='sortComment' name='sortComment'value="1" />
+							<input type='hidden' id='sortComment' name='sortComment' value="1" />
 							<button type='submit' class='btn btn-success'>Tous les nouveaux</button>
 						</form>
 						<form class="p-2" method='post' action='index.php?action=serialcomment'>
@@ -33,7 +33,7 @@
 			</div>
 			<div class="col-lg-offset-1 col-lg-1"></div>
 		</div>
-		<?php if (isset($_POST['sortComment'])) while ($data = $q->fetch()) { ?>
+		<?php if (isset($_POST['sortComment'])) { while ($data = $q->fetch()) { ?>
 		<div class="row">
 			<div class="col-lg-offset-1 col-lg-1"></div>
 			<div class="col-lg-10">
@@ -53,8 +53,35 @@
 			</div>
 			<div class="col-lg-offset-1 col-lg-1"></div>
 		</div>
-		<?php } ?>
+		<?php } $q->closeCursor(); }?>
 	</div>
+<?php if ($numberOfPages != 0) { ?>
+<ul class="pagination pagination-sm justify-content-center m-2">
+	<?php if ($pageNum == 1) { ?>
+  		<li class="page-item disabled"><a class="page-link" href="#">Précédent</a></li>
+	<?php } else { $pagePrec = $pageNum-1; ?>
+		<li class="page-item">
+			<a class="page-link" href="index.php?action=serialcomment&amp;sort=<?= $_POST['sortComment'] ?>&amp;pageNum=<?= $pagePrec ?>">Précédent</a>
+		</li>
+	<?php } ?>
+	<?php for ($i=1;$i<=$numberOfPages;$i++) { ?>
+	<?php if ($i == $pageNum) { ?>
+  		<li class="page-item active">
+	<?php } else { ?>
+		<li class="page-item">
+	<?php } ?>
+	  	<a class="page-link" href="index.php?action=serialcomment&amp;sort=<?= $_POST['sortComment'] ?>&amp;pageNum=<?= $i ?>"><?= $i ?></a>
+	</li>
+	<?php } ?>
+	<?php if ($pageNum == $numberOfPages) { ?>
+  		<li class="page-item disabled"><a class="page-link" href="#">Suivant</a></li>
+	<?php } else { $pageSuiv = $pageNum+1; ?>
+		<li class="page-item">
+			<a class="page-link" href="index.php?action=serialcomment&amp;sort=<?= $_POST['sortComment'] ?>&amp;pageNum=<?= $pageSuiv ?>">Suivant</a>
+		</li>
+	<?php } ?>
+</ul>
+<?php } ?>
 </section>
 <?php $sectionMainContent = ob_get_clean(); ?>
 

@@ -85,8 +85,6 @@ try {
 	}
 	
 	if (isset($_GET['action']) && $_GET['action'] == 'serialcomment') {
-		if (isset($_GET['sort']))
-			$_POST['sortComment'] = $_GET['sort'];
 		manageComment();
 	}
 	
