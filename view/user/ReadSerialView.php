@@ -17,6 +17,9 @@
 		</div>
 	</div>
 	<div class="container" id="sendComment">
+		<?php if (isset($_GET['comment'])) { ?>
+		<input type="hidden" id="commentAdded" name="commentAdded" />	
+		<?php } ?>
 		<div class="row">
 			<div class="col-lg-offset-1 col-lg-1"></div>
 			<div class="col-lg-10" id="send-comment">
@@ -33,6 +36,9 @@
 		</div>
 	</div>
 	<div class="container" id="showComment">
+		<?php if (isset($_GET['signal'])) { ?>
+		<input type="hidden" id="commentSignaled" name="commentSignaled" />
+		<?php } ?>
 		<?php
 		while ($data = $q->fetch()) {
 		?>
@@ -66,12 +72,15 @@
 		?>
 	</div>
 <?php if ($numberOfPages != 0) { ?>
-<ul class="pagination pagination-sm justify-content-center m-2">
+<ul class="pagination pagination-sm justify-content-center m-2" id="pageComment">
+	<?php if (isset($_GET['page'])) { ?>
+	<input type="hidden" id="commentPage" name="commentPage" />
+	<?php } ?>
 	<?php if ($pageNum == 1) { ?>
   		<li class="page-item disabled"><a class="page-link" href="#">Précédent</a></li>
 	<?php } else { $pagePrec = $pageNum-1; ?>
 		<li class="page-item">
-			<a class="page-link" href="index.php?action=readserial&amp;serialId=<?= $serialId ?>&amp;pageNum=<?= $pagePrec ?>">Précédent</a>
+			<a class="page-link" href="index.php?action=readserial&amp;page&amp;serialId=<?= $serialId ?>&amp;pageNum=<?= $pagePrec ?>">Précédent</a>
 		</li>
 	<?php } ?>
 	<?php for ($i=1;$i<=$numberOfPages;$i++) { ?>
@@ -80,14 +89,14 @@
 	<?php } else { ?>
 		<li class="page-item">
 	<?php } ?>
-	  	<a class="page-link" href="index.php?action=readserial&amp;serialId=<?= $serialId ?>&amp;pageNum=<?= $i ?>"><?= $i ?></a>
+	  	<a class="page-link" href="index.php?action=readserial&amp;page&amp;serialId=<?= $serialId ?>&amp;pageNum=<?= $i ?>"><?= $i ?></a>
 	</li>
 	<?php } ?>
 	<?php if ($pageNum == $numberOfPages) { ?>
   		<li class="page-item disabled"><a class="page-link" href="#">Suivant</a></li>
 	<?php } else { $pageSuiv = $pageNum+1; ?>
 		<li class="page-item">
-			<a class="page-link" href="index.php?action=readserial&amp;serialId=<?= $serialId ?>&amp;pageNum=<?= $pageSuiv ?>">Suivant</a>
+			<a class="page-link" href="index.php?action=readserial&amp;page&amp;serialId=<?= $serialId ?>&amp;pageNum=<?= $pageSuiv ?>">Suivant</a>
 		</li>
 	<?php } ?>
 </ul>

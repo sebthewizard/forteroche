@@ -41,11 +41,11 @@
 				 pour l'épisode <?= $data['serial_number'] ?></p>
 				<p class="comment-content"><?= $data['comment_content'] ?></p>
 				<div class="d-flex justify-content-end flex-wrap">
-					<form class="p-2" method='post' action='index.php?action=commentdelete&amp;sort=<?= $_POST['sortComment'] ?>'>
+					<form class="p-2" method='post' action='index.php?action=commentdelete&amp;sort=<?= $_POST['sortComment'] ?>&amp;pageNum=<?= $pageNum ?>'>
 						<input type='hidden' id='deleteComment' name='deleteComment' value="<?= $data['comment_id'] ?>" />
 						<button type='submit' class='btn btn-outline-success btn-sm'>Supprimer</button>
 					</form>
-					<form class="p-2" method='post' action='index.php?action=commentvalidate&amp;sort=<?= $_POST['sortComment'] ?>'>
+					<form class="p-2" method='post' action='index.php?action=commentvalidate&amp;sort=<?= $_POST['sortComment'] ?>&amp;pageNum=<?= $pageNum ?>'>
 						<input type='hidden' id='validateComment' name='validateComment' value="<?= $data['comment_id'] ?>" />
 						<button type='submit' class='btn btn-outline-success btn-sm'>Valider</button>
 					</form>

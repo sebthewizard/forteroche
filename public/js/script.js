@@ -19,4 +19,37 @@ window.onload = function() {
 	if (fr !== null) fr.style.opacity = "1";
 	var fc = document.getElementById("formConnect");
 	if (fc !== null) fc.style.opacity = "1";
+	
+	var ca = document.getElementById("commentAdded");
+	if (ca !== null) {
+		var sc = document.getElementById("sendComment");
+		var rect = sc.getBoundingClientRect();
+		window.scroll({
+			top: rect.top,
+			left: 0,
+			behavior: 'smooth'
+		});
+	}
+	
+	var cs = document.getElementById("commentSignaled");
+	if (cs !== null) {
+		var shc = document.getElementById("showComment");
+		var rect = shc.getBoundingClientRect();
+		window.scroll({
+			top: rect.top,
+			left: 0,
+			behavior: 'smooth'
+		});
+	}
+	
+	var cp = document.getElementById("commentPage");
+	if (cp !== null) {
+		var pc = document.getElementById("pageComment");
+		var rect = pc.getBoundingClientRect();
+		window.scroll({
+			top: rect.top,
+			left: 0,
+			behavior: 'smooth'
+		});
+	}
 }

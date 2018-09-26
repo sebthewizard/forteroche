@@ -63,7 +63,7 @@
 	<?= $sectionMainContent ?>
 	
 	<footer>
-		<p>footer</p>
+		<?php require('view/FooterView.php'); ?>
 	</footer>
 	
 	<!-- tinymce -->

@@ -12,13 +12,13 @@ function addComment() {
 		$manager = new CommentsManager();
 		$manager->add($comment);
 		}
-	header("Location: index.php?action=readserial&serialId=".$_POST['serialId']);
+	header("Location: index.php?action=readserial&comment&serialId=".$_POST['serialId']);
 }
 
 function signalComment($commentId, $serialId) {
 	$manager = new CommentsManager();
 	$manager->changeSignaled($commentId);
-	header("Location: index.php?action=readserial&pageNum=".$_GET['pageNum']."&serialId=".$serialId);
+	header("Location: index.php?action=readserial&signal&pageNum=".$_GET['pageNum']."&serialId=".$serialId);
 }
 
 function manageComment() {
@@ -47,8 +47,9 @@ function manageComment() {
     		$pageNum = 1;
     	}
 		$commentsPerPage = 7;
+		$numberOfPages = ceil($q->rowCount() / $commentsPerPage);
+		if ($pageNum > $numberOfPages) { $pageNum = $numberOfPages;}
 		$offset = ($pageNum-1) * $commentsPerPage;
-		$numberOfPages = ceil($q->rowCount() / $commentsPerPage);	
 		if ($_POST['sortComment'] == 1) {
 			$q = $manager->getAllCommentsNotValidated($offset,$commentsPerPage);
 		}
@@ -69,11 +70,11 @@ function manageComment() {
 function deleteComment() {
 	$manager = new CommentsManager();
 	$manager->deleteComment($_POST['deleteComment']);
-	header("Location: index.php?action=serialcomment&sort=".$_GET['sort']);
+	header("Location: index.php?action=serialcomment&sort=".$_GET['sort']."&pageNum=".$_GET['pageNum']);
 }
 
 function validateComment() {
 	$manager = new CommentsManager();
 	$manager->changeCommentToValidated($_POST['validateComment']);
-	header("Location: index.php?action=serialcomment&sort=".$_GET['sort']);
+	header("Location: index.php?action=serialcomment&sort=".$_GET['sort']."&pageNum=".$_GET['pageNum']);
 }
