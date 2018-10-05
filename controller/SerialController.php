@@ -18,31 +18,31 @@ function addSerial() {
 		'title' => $ts);
 	$serial = new Serial($data);
 	$manager = new SerialsManager();
-	$num = $manager->add($serial);
+	$num = $manager->addSerial($serial);
 	if ($num == false) throw new Exception('Numéro épisode déja utilisé',103);
 	header('Location: index.php?action=serialnew&new=1');
 }
 
 function chooseSerialToUpdate() {
 	$manager = new SerialsManager();
-	$q = $manager->all();
+	$q = $manager->getAllSerials();
 	require('view/serial/ChooseUpdateSerialView.php');
 }
 
 function updateSerial() {
 	$manager = new SerialsManager();
-	$manager->update($_POST['serialIdToUpdate'],$_POST['editserial']);
+	$manager->updateSerial($_POST['serialIdToUpdate'],$_POST['editserial']);
 	header('Location: index.php?action=chooseserialtoupdate&update=1');
 }
 
 function chooseSerialToDelete() {
 	$manager = new SerialsManager();
-	$q = $manager->all();
+	$q = $manager->getAllSerials();
 	require('view/serial/ChooseDeleteSerialView.php');
 }
 
 function deleteSerial() {
 	$manager = new SerialsManager();
-	$manager->delete($_POST['serialIdToDelete']);
+	$manager->deleteSerial($_POST['serialIdToDelete']);
 	header('Location: index.php?action=chooseserialtodelete&delete=1');
 }

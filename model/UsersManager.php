@@ -14,7 +14,7 @@ class UsersManager extends Manager {
     	$this->_db = $db;
   	}
 	
-	public function add(User $newUser) {
+	public function addUser(User $newUser) {
 		$q = $this->_db->query('SELECT COUNT(*) AS nb FROM users WHERE pseudo = '.'\''.$newUser->pseudo().'\'') or die(print_r($this->_db->errorInfo()));
 		$data = $q->fetch();
 		if ($data['nb'] > 0) return false;
@@ -28,7 +28,7 @@ class UsersManager extends Manager {
 		return $this->getId($newUser->pseudo());
 	}
 	
-	public function getId($pseudo) {
+	public function getUserId($pseudo) {
 		$q = $this->_db->query('SELECT COUNT(*) AS nb FROM users WHERE pseudo = '.'\''.$pseudo.'\'') or die(print_r($this->_db->errorInfo()));
 		$data = $q->fetch();
 		if ($data['nb'] == 0) return false;
@@ -38,21 +38,21 @@ class UsersManager extends Manager {
 		return $data['id'];
 	}
 	
-	public function getPseudo($id) {
+	public function getUserPseudo($id) {
 		$q = $this->_db->query('SELECT pseudo FROM users WHERE id = '.$id) or die(print_r($this->_db->errorInfo()));
 		$data = $q->fetch();
 		$q->closeCursor();
 		return $data['pseudo'];
 	}
 	
-	public function getPass($pseudo) {
+	public function getUserPass($pseudo) {
 		$q = $this->_db->query('SELECT passwd FROM users WHERE pseudo = '.'\''.$pseudo.'\'') or die(print_r($this->_db->errorInfo()));
 		$data = $q->fetch();
 		$q->closeCursor();
 		return $data['passwd'];
 	}
 	
-	public function getAdmin($id) {
+	public function getUserAdmin($id) {
 		$q = $this->_db->query('SELECT admin FROM users WHERE id = '.$id) or die(print_r($this->_db->errorInfo()));
 		$data = $q->fetch();
 		$q->closeCursor();

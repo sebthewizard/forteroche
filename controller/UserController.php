@@ -15,16 +15,16 @@ function connectedHome() {
 	if (!isset($_SESSION['id'])) {
 		$manager = new UsersManager();
 		$_SESSION['id'] = $_COOKIE['userid'];
-		$_SESSION['pseudo'] = $manager->getPseudo($_COOKIE['userid']);
-		$_SESSION['admin'] = $manager->getAdmin($_COOKIE['userid']);
+		$_SESSION['pseudo'] = $manager->getUserPseudo($_COOKIE['userid']);
+		$_SESSION['admin'] = $manager->getUserAdmin($_COOKIE['userid']);
 	}
 	$manager = new SerialsManager();
-	$q = $manager->all();
+	$q = $manager->getAllSerials();
     require('view/user/ConnectedHomeView.php');
 }
 
-function connexion($errorMessage, $errorCode) {
-    require('view/user/ConnexionView.php');
+function connection($errorMessage, $errorCode) {
+    require('view/user/ConnectionView.php');
 }
 
 function connectUser() {
@@ -35,14 +35,14 @@ function connectUser() {
 	else $pa = htmlspecialchars(trim($_POST['password']));
 	if (empty($pa)) throw new Exception('Mot de passe invalide',2);
 	$manager = new UsersManager();
-	$id = $manager->getId($ps);
+	$id = $manager->getUserId($ps);
 	if ($id == false) throw new Exception('Pseudo inconnu',1);
-	$pah = $manager->getPass($ps);
+	$pah = $manager->getUserPass($ps);
 	$isPasswordOk = password_verify($pa, $pah);
 	if ($isPasswordOk) {
 		$_SESSION['id'] = $id;
 		$_SESSION['pseudo'] = $ps;
-		$_SESSION['admin'] = $manager->getAdmin($id);
+		$_SESSION['admin'] = $manager->getUserAdmin($id);
 	}
 	else throw new Exception('Mot de passe invalide',2);
 	if (isset($_POST['cookie']) && $_POST['cookie'] == 'yes') setcookie('userid', $_SESSION['id'], time() + 365*24*3600, null, null, false, true);
@@ -82,11 +82,11 @@ function addUser() {
 		'email' => $em);
 	$user = new User($data);
 	$manager = new UsersManager();
-	$id = $manager->add($user);
+	$id = $manager->addUser($user);
 	if ($id == false) throw new Exception('Pseudo déja utilisé',3);
 	$_SESSION['id'] = $id;
-	$_SESSION['pseudo'] = $manager->getPseudo($id);
-	$_SESSION['admin'] = $manager->getAdmin($id);
+	$_SESSION['pseudo'] = $manager->getUserPseudo($id);
+	$_SESSION['admin'] = $manager->getUserAdmin($id);
 	if (isset($_POST['cookie']) && $_POST['cookie'] == 'yes') setcookie('userid', $_SESSION['id'], time() + 365*24*3600, null, null, false, true);
 	header('Location: index.php');
 }
@@ -97,11 +97,11 @@ function adminHome() {
 
 function readSerial($serialId) {
 	$managerComment = new CommentsManager();
-	$q = $managerComment->getFromSerial($serialId,0,0);
+	$q = $managerComment->getCommentsFromSerial($serialId,0,0);
 	$managerSerial = new SerialsManager();
-	$dataSerial = $managerSerial->get($serialId);
+	$dataSerial = $managerSerial->getSerial($serialId);
 	$managerUser = new UsersManager();
-	$pseudo = $managerUser->getPseudo($dataSerial['id_user']);
+	$pseudo = $managerUser->getUserPseudo($dataSerial['id_user']);
 	if (isset($_GET['pageNum'])) {
     	$pageNum = $_GET['pageNum'];
     } else {
@@ -110,7 +110,7 @@ function readSerial($serialId) {
 	$commentsPerPage = 7;
 	$offset = ($pageNum-1) * $commentsPerPage;
 	$numberOfPages = ceil($q->rowCount() / $commentsPerPage);
-	$q = $managerComment->getFromSerial($serialId,$offset,$commentsPerPage);
+	$q = $managerComment->getCommentsFromSerial($serialId,$offset,$commentsPerPage);
 	
 	
 	require('view/user/ReadSerialView.php');

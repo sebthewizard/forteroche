@@ -2,6 +2,8 @@ window.onload = function() {
 	
 	tinymce.init({
     	selector: '#editserial',
+		theme: "modern",
+		toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | fullpage | fontselect fontsizeselect",
 		language: 'fr_FR'
   	});
 	

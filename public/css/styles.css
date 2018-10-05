@@ -14,15 +14,17 @@
 	src: url('../fonts/Note_this.ttf') format('truetype');
 }
 
-body {
+body, footer {
 	background-color: #343a40;
+}
+
+footer {
+	color: white;
 }
 
 p, h1, h2, h3, h4 {
 	margin: 0;
 }
-
-/* HEADER */
 
 .jumbotron-header-img {
 	background: url("../images/home.jpg") no-repeat center center fixed; 
@@ -30,87 +32,59 @@ p, h1, h2, h3, h4 {
 	margin-bottom: 0 !important;
 }
 
-#textJumbotron {
+#textJumbotron h1, #notConnectedHome h1 {
+	font-family: NoteThis, Helvetica, sans-serif;
+}
+
+#textJumbotron, #notConnectedHome, #register, #connect,
+.date-serial, .update-date-serial, #send-comment,
+.comment-content, #adminHome h4, #adminHome p {
 	font-family: RobotoLight, Helvetica, sans-serif;
+}
+
+.title-serial, #adminHome h2, #adminNewSerial h2,
+#adminDeleteSerial h2, #adminUpdateSerial h2, #adminCommentSerial h2 {
+	font-family: RobotoBlack, Helvetica, sans-serif;
+}
+
+#textJumbotron {
 	text-align: center;
 	background-color: rgba(52, 58, 64, 0.75);
 	color: white;
 	padding: 10px;
 	border-radius: 5px;
 }
-
-#textJumbotron h1 {
-	font-family: NoteThis, Helvetica, sans-serif;
-}
-/* SECTION */
 
 .error {
 	color: red;
 }
 
-/* NotConnectedHomeView */
+#notConnectedHome, #register {
+	background-size: cover;
+	min-height: 90vh;
+	padding: 0;
+	color: white;	
+}
 
 #notConnectedHome {
-	font-family: RobotoLight, Helvetica, sans-serif;
 	background: url("../images/home.jpg") no-repeat center center fixed; 
-	background-size: cover;
-	min-height: 90vh;
-	padding: 0;
-	color: white;
 }
-
-#textNotConnectedHome {
-	background-color: rgba(52, 58, 64, 0.75);
-	text-align: center;
-	padding: 10px;
-	border-radius: 5px;
-	opacity: 0;
-	transition: opacity 1.3s;
-}
-
-#notConnectedHome h1 {
-	font-family: NoteThis, Helvetica, sans-serif;
-}
-
-/* RegisterView */
 
 #register {
-	font-family: RobotoLight, Helvetica, sans-serif;
 	background: url("../images/register.jpg") no-repeat center center fixed; 
-	background-size: cover;
 	text-align: center;
-	min-height: 90vh;
-	padding: 0;
-	color: white;
 }
-
-#formRegister {
-	background-color: rgba(52, 58, 64, 0.75);
-	text-align: center;
-	padding: 10px;
-	border-radius: 5px;
-	opacity: 0;
-	transition: opacity 1.3s;
-}
-
-#formRegister h2 {
-	color: #28a745;
-	margin-bottom: 10px;
-}
-
-/* ConnexionView */
 
 #connect {
-	font-family: RobotoLight, Helvetica, sans-serif;
 	background: url("../images/connexion.jpg") no-repeat center center fixed; 
-	background-size: cover;
 	text-align: center;
+	background-size: cover;
 	min-height: 90vh;
 	padding: 0;
 	color: white;
 }
 
-#formConnect {
+#textNotConnectedHome, #formRegister, #formConnect {
 	background-color: rgba(52, 58, 64, 0.75);
 	text-align: center;
 	padding: 10px;
@@ -119,19 +93,16 @@ p, h1, h2, h3, h4 {
 	transition: opacity 1.3s;
 }
 
-#formConnect h2 {
+#formRegister h2, #formConnect h2 {
 	color: #28a745;
 	margin-bottom: 10px;
 }
-
-/* ConnectedHomeView */
 
 .container-serial {
 	margin: 20px 0;
 }
 
 .title-serial {
-	font-family: RobotoBlack, Helvetica, sans-serif;
 	font-size: 1.8rem;
 	text-transform: uppercase;
 	color: #28a745;
@@ -140,7 +111,6 @@ p, h1, h2, h3, h4 {
 }
 
 .date-serial, .update-date-serial {
-	font-family: RobotoLight, Helvetica, sans-serif;
 	font-size: 0.8rem;
 	padding-left: 5px;
 	background-color: white;
@@ -161,15 +131,12 @@ p, h1, h2, h3, h4 {
 	box-shadow: 0px -30px 30px -10px white;
 }
 
-/* ReadSerialView */
-
 #content-serial {
 	background-color: white;
 	padding: 20px;
 }
 
 #send-comment {
-	font-family: RobotoLight, Helvetica, sans-serif;
 	font-size: 1.2rem;
 	color: #28a745;
 	text-align: center;
@@ -204,18 +171,15 @@ p, h1, h2, h3, h4 {
 }
 
 .comment-content {
-	font-family: RobotoLight, Helvetica, sans-serif;
 	color: white;
 }
-
-/* adminHomeView */
 
 #adminHome {
 	min-height: 80vh;
 }
 
-#adminHome h2 {
-	font-family: RobotoBlack, Helvetica, sans-serif;
+#adminHome h2, #adminNewSerial h2, #adminDeleteSerial h2,
+#adminUpdateSerial h2, #adminCommentSerial h2 {
 	text-align: center;
 	text-transform: uppercase;
 	color: #28a745;
@@ -223,7 +187,6 @@ p, h1, h2, h3, h4 {
 }
 
 #adminHome h4 {
-	font-family: RobotoLight, Helvetica, sans-serif;
 	color: #28a745;
 }
 
@@ -237,26 +200,16 @@ p, h1, h2, h3, h4 {
 }
 
 #adminHome p {
-	font-family: RobotoLight, Helvetica, sans-serif;
 	text-align: center;
 	color: white;
 }
 
-/* NewSerialView */
-
-#adminNewSerial h2 {
-	font-family: RobotoBlack, Helvetica, sans-serif;
-	text-align: center;
-	text-transform: uppercase;
-	color: #28a745;
-	margin-bottom: 20px;
-}
-
-#adminNewSerial label {
+#adminNewSerial label, #adminDeleteSerial label, #adminUpdateSerial label {
 	color: white;
 }
 
-#adminNewSerial .form-group {
+#adminNewSerial .form-group, #adminDeleteSerial .form-group,
+#adminUpdateSerial .form-group {
 	text-align: center;
 }
 
@@ -264,74 +217,12 @@ p, h1, h2, h3, h4 {
 	width: 100%;
 }
 
-#newSerialInfo {
+#newSerialInfo, #deleteSerialInfo, #updateSerialInfo {
 	color: #28a745;
 }
-
-/* ChooseDeleteSerialView */
-
-#adminDeleteSerial h2 {
-	font-family: RobotoBlack, Helvetica, sans-serif;
-	text-align: center;
-	text-transform: uppercase;
-	color: #28a745;
-	margin-bottom: 20px;
-}
-
-#adminDeleteSerial label {
-	color: white;
-}
-
-#adminDeleteSerial .form-group {
-	text-align: center;
-}
-
-#deleteSerialInfo {
-	color: #28a745;
-}
-
-/* ChooseUpdateSerialView */
-
-#adminUpdateSerial h2 {
-	font-family: RobotoBlack, Helvetica, sans-serif;
-	text-align: center;
-	text-transform: uppercase;
-	color: #28a745;
-	margin-bottom: 20px;
-}
-
-#adminUpdateSerial label {
-	color: white;
-}
-
-#adminUpdateSerial .form-group {
-	text-align: center;
-}
-
-#updateSerialInfo {
-	color: #28a745;
-}
-
-/* SerialCommentView */
 
 #adminCommentSerial {
 	min-height: 70vh;
-}
-
-#adminCommentSerial h2 {
-	font-family: RobotoBlack, Helvetica, sans-serif;
-	text-align: center;
-	text-transform: uppercase;
-	color: #28a745;
-	margin-bottom: 20px;
-}
-
-
-
-/* FOOTER */
-footer {
-	background-color: #343a40;
-	color: white;
 }
 
 

@@ -17,8 +17,8 @@ try {
 		else {connectedHome();}
 	}
 	
-	if (isset($_GET['action']) && $_GET['action'] == 'connexion') {
-		connexion('',0);
+	if (isset($_GET['action']) && $_GET['action'] == 'connection') {
+		connection('',0);
 	}
 	
 	if (isset($_GET['action']) && $_GET['action'] == 'connectuser') {
@@ -101,7 +101,7 @@ try {
 catch(Exception $e) {
 	switch ($e->getCode()) {
 		case 1: case 2:
-			connexion($e->getMessage(), $e->getCode());
+			connection($e->getMessage(), $e->getCode());
 			break;
 		case 3: case 4: case 5:
 			register($e->getMessage(), $e->getCode());
@@ -116,8 +116,8 @@ catch(Exception $e) {
 }
 
 // index des erreurs
-// 1 : pseudo inconnu ou invalide lors de la connection
-// 2 : mot de passe invalide ou ne correspond pas au pseudo lors de la connection
+// 1 : pseudo inconnu ou invalide lors de la connexion
+// 2 : mot de passe invalide ou ne correspond pas au pseudo lors de la connexion
 // 3 : pseudo inconnu ou invalide ou déja utilisé lors de l'enregistrement d'un nouvel utilisateur
 // 4 : mot de passe invalide ou différents lors de l'enregistrement d'un nouvel utilisateur
 // 5 : email invalide lors de l'enregistrement d'un nouvel utilisateur

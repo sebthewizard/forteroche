@@ -41,7 +41,7 @@
 							if (isset($_SESSION['pseudo']))
 								echo "<a class='nav-link' href='index.php?action=disconnection'>Déconnexion</a>";
 							else
-								echo "<a class='nav-link' href='index.php?action=connexion'>Se connecter</a>";
+								echo "<a class='nav-link' href='index.php?action=connection'>Se connecter</a>";
 							?>
     					</li>
     					<li class="nav-item">

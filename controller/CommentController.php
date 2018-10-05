@@ -10,14 +10,14 @@ function addComment() {
 			'content' => $co);
 		$comment = new Comment($data);
 		$manager = new CommentsManager();
-		$manager->add($comment);
+		$manager->addComment($comment);
 		}
 	header("Location: index.php?action=readserial&comment&serialId=".$_POST['serialId']);
 }
 
 function signalComment($commentId, $serialId) {
 	$manager = new CommentsManager();
-	$manager->changeSignaled($commentId);
+	$manager->changeCommentToSignaled($commentId);
 	header("Location: index.php?action=readserial&signal&pageNum=".$_GET['pageNum']."&serialId=".$serialId);
 }
 
