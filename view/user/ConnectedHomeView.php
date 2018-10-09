@@ -4,7 +4,6 @@
 <section>
 	<div class="container" id="listSerial">
 		<?php
-		$nb = 0;
 		while ($data = $q->fetch()) {
 		?>
 			<div class="row">

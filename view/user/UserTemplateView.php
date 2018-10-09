@@ -3,6 +3,12 @@
 
 <head>
 	<title><?= $title ?></title>
+	<meta name="description" content="Le blog de jean forteroche pour son dernier roman billet simple pour l'Alaska">
+	<!-- Open Graph -->
+	<meta property="og:title" content="Blog écrivain" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="http://www.thewizard.compteweb.com/forteroche/" />
+	<meta property="og:image" content="http://www.thewizard.compteweb.com/forteroche/public/images/feather.png" />
     <meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" />
@@ -44,9 +50,11 @@
 								echo "<a class='nav-link' href='index.php?action=connection'>Se connecter</a>";
 							?>
     					</li>
+						<?php if (!isset($_SESSION['pseudo'])) { ?>
     					<li class="nav-item">
       						<a class="nav-link" href="index.php?action=register">S'inscrire</a>
     					</li>
+						<?php } ?>
 						<?php
 						if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
 							echo "<li class='nav-item'>";
